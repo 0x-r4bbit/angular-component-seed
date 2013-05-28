@@ -2,16 +2,16 @@
   "author": "Pascal Precht",
   "name": "angular-component-seed",
   "description": "Seed for reusable Angular components.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "http://github.com/PascalPrecht/angular-component-seed",
   "repository": {
     "type": "git",
     "url": "git://github.com/PascalPrecht/angular-component-seed"
   },
   "dependencies": {
-    "angular": "1.0.6"
+    "angular": "1.0.7"
   },
   "devDependencies": {
-    "angular-mocks": "~1.0.6"
+    "angular-mocks": "~1.0.7"
   }
 }
