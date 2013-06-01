@@ -49,7 +49,11 @@ module.exports = function (grunt) {
       unit: {
         configFile: 'karma.conf.js',
         singleRun: true
-      }
+      },
+      server: {
+        configFile: 'karma.conf.js',
+        singleRun: false
+      },
     },
     changelog: {
       options: {
@@ -65,6 +69,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', ['jshint', 'karma']);
-  grunt.registerTask('test', ['karma']);
-  grunt.registerTask('build', ['jshint', 'karma', 'concat', 'ngmin', 'uglify']);
+  grunt.registerTask('test', ['karma:unit']);
+  grunt.registerTask('test-server', ['karma:server']);
+  grunt.registerTask('build', ['jshint', 'karma:unit', 'concat', 'ngmin', 'uglify']);
 };
