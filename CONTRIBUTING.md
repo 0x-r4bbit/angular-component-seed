@@ -26,7 +26,7 @@ When **npm** is installed, use it to install the needed npm packages:
 To get the source of this project clone the git repository via:
 
 ````
-$ git clone https://github.com/PascalPrecht/angular-iterator
+$ git clone https://github.com/PascalPrecht/angular-component-seed
 ````
 
 This will clone the complete source to your local machine. Navigate to the project folder

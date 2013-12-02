@@ -1,12 +1,14 @@
 module.exports = function (grunt) {
+  'use strict';
 
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-conventional-changelog');
-  grunt.loadNpmTasks('grunt-ngmin');
+  require('load-grunt-tasks')(grunt);
+  var _ = require('lodash');
+
+  var karmaConfig = function(configFile, customOptions) {
+    var options = { configFile: configFile, keepalive: true };
+    var travisOptions = process.env.TRAVIS && { browsers: ['Firefox'], reporters: 'dots' };
+    return _.extend(options, customOptions, travisOptions);
+  };
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('bower.json'),
@@ -47,8 +49,14 @@ module.exports = function (grunt) {
     },
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
-        singleRun: true
+        options: karmaConfig('karma.conf.js', {
+          singleRun: true
+        })
+      },
+      server: {
+        options: karmaConfig('karma.conf.js', {
+          singleRun: false
+        })
       }
     },
     changelog: {
@@ -64,7 +72,8 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['jshint', 'karma']);
-  grunt.registerTask('test', ['karma']);
-  grunt.registerTask('build', ['jshint', 'karma', 'concat', 'ngmin', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'karma:unit']);
+  grunt.registerTask('test', ['karma:unit']);
+  grunt.registerTask('test-server', ['karma:server']);
+  grunt.registerTask('build', ['jshint', 'karma:unit', 'concat', 'ngmin', 'uglify']);
 };
