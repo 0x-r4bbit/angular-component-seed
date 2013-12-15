@@ -75,5 +75,5 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['jshint', 'karma:unit']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('test-server', ['karma:server']);
-  grunt.registerTask('build', ['jshint', 'karma:unit', 'concat', 'ngmin', 'uglify']);
+  grunt.registerTask('build', ['clean', 'jshint', 'karma:unit', 'concat', 'ngmin', 'uglify']);
 };
