@@ -69,7 +69,8 @@ module.exports = function (grunt) {
         src: '<%= concat.src.dest %>',
         dest: '<%= concat.src.dest %>'
       }
-    }
+    },
+    clean: ['dist/*']
   });
 
   grunt.registerTask('default', ['jshint', 'karma:unit']);
