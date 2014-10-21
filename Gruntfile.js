@@ -35,15 +35,19 @@ module.exports = function (grunt) {
       }
     },
     concat: {
-      src: {
+      js: {
         src: ['src/**/*.js'],
         dest: 'dist/angular-component-<%= pkg.version %>.js'
+      },
+      css: {
+        src: ['src/**/*.css'],
+        dest: 'dist/angular-component-<%= pkg.version %>.css'
       }
     },
     uglify: {
       src: {
         files: {
-          'dist/angular-component-<%= pkg.version %>.min.js': '<%= concat.src.dest %>'
+          'dist/angular-component-<%= pkg.version %>.min.js': '<%= concat.js.dest %>'
         }
       }
     },
@@ -66,8 +70,14 @@ module.exports = function (grunt) {
     },
     ngmin: {
       src: {
-        src: '<%= concat.src.dest %>',
-        dest: '<%= concat.src.dest %>'
+        src: '<%= concat.js.dest %>',
+        dest: '<%= concat.js.dest %>'
+      }
+    },
+    cssmin: {
+      css: {
+        src: '<%= concat.css.dest %>',
+        dest: 'dist/angular-component-<%= pkg.version %>.min.css'
       }
     },
     clean: ['dist/*']
@@ -76,5 +86,5 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['jshint', 'karma:unit']);
   grunt.registerTask('test', ['karma:unit']);
   grunt.registerTask('test-server', ['karma:server']);
-  grunt.registerTask('build', ['clean', 'jshint', 'karma:unit', 'concat', 'ngmin', 'uglify']);
+  grunt.registerTask('build', ['clean', 'jshint', 'karma:unit', 'concat', 'ngmin', 'cssmin', 'uglify']);
 };
